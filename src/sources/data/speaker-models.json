@@ -1,0 +1,431 @@
+{
+  "_meta": {
+    "description": "Leistungsdaten fuer Sonos-Geraete. idle_w stammt aus der offiziellen Sonos-Tabelle 'Power Consumption While Idle' (je Netzspannung), max_w ist die geschaetzte Aufnahme bei voller Lautstaerke.",
+    "idle_source": "https://support.sonos.com/en-us/article/sonos-power-consumption-while-idle",
+    "max_hinweis": "Sonos veroeffentlicht keine Werte fuer den Abspielbetrieb. Die Maximalwerte sind aus Verstaerkerleistung und Community-Messungen abgeleitet (Sonos One laut rund 20 W) und deshalb durchweg als 'estimated' markiert.",
+    "kinds": {
+      "speaker": "eigener Verstaerker, Verbrauch haengt an der Lautstaerke",
+      "line": "nur Vorstufe/Line-Out, kaum lautstaerkeabhaengig",
+      "network": "reines Netzwerkgeraet ohne Verstaerker"
+    },
+    "symfonisk_hinweis": "IKEA-SYMFONISK-Geraete laufen mit Sonos-Firmware und werden mitgefunden; ihre Werte stammen aus Community-Messungen, nicht vom Hersteller.",
+    "no_ethernet_hinweis": "Era-Modelle haben keinen eingebauten Netzwerkanschluss. Haengen sie trotzdem am Kabel, laeuft das ueber den USB-Adapter von Sonos, der zusaetzlich Strom zieht (config.json: usb_adapter_watts)."
+  },
+  "defaults": {
+    "speaker": {
+      "idle_w": {
+        "230": 4.0,
+        "120": 3.8
+      },
+      "max_w": 20.0,
+      "gamma": 2.0,
+      "kind": "speaker",
+      "label": "Sonos Lautsprecher (generisch)",
+      "source": "estimated"
+    }
+  },
+  "models": {
+    "amp": {
+      "idle_w": {
+        "230": 6.8,
+        "120": 7.3
+      },
+      "max_w": 200.0,
+      "kind": "speaker",
+      "label": "Sonos Amp",
+      "source": "nameplate"
+    },
+    "connect:amp": {
+      "idle_w": {
+        "230": 6.4,
+        "120": 6.2
+      },
+      "max_w": 120.0,
+      "kind": "speaker",
+      "label": "Sonos Connect:Amp",
+      "source": "nameplate"
+    },
+    "arc": {
+      "idle_w": {
+        "230": 4.4,
+        "120": 4.3
+      },
+      "max_w": 32.0,
+      "kind": "speaker",
+      "label": "Sonos Arc",
+      "source": "nameplate"
+    },
+    "arc sl": {
+      "idle_w": {
+        "230": 4.4,
+        "120": 4.3
+      },
+      "max_w": 32.0,
+      "kind": "speaker",
+      "label": "Sonos Arc SL",
+      "source": "nameplate"
+    },
+    "arc ultra": {
+      "idle_w": {
+        "230": 4.6,
+        "120": 4.6
+      },
+      "max_w": 38.0,
+      "kind": "speaker",
+      "label": "Sonos Arc Ultra",
+      "source": "nameplate"
+    },
+    "beam": {
+      "idle_w": {
+        "230": 6.1,
+        "120": 5.8
+      },
+      "max_w": 22.0,
+      "kind": "speaker",
+      "label": "Sonos Beam (Gen 1)",
+      "source": "nameplate"
+    },
+    "beam (gen 2)": {
+      "idle_w": {
+        "230": 6.3,
+        "120": 6.04
+      },
+      "max_w": 22.0,
+      "kind": "speaker",
+      "label": "Sonos Beam (Gen 2)",
+      "source": "nameplate"
+    },
+    "playbar": {
+      "idle_w": {
+        "230": 6.1,
+        "120": 5.8
+      },
+      "max_w": 30.0,
+      "kind": "speaker",
+      "label": "Sonos Playbar",
+      "source": "nameplate"
+    },
+    "playbase": {
+      "idle_w": {
+        "230": 3.0,
+        "120": 2.8
+      },
+      "max_w": 28.0,
+      "kind": "speaker",
+      "label": "Sonos Playbase",
+      "source": "nameplate"
+    },
+    "ray": {
+      "idle_w": {
+        "230": 2.92,
+        "120": 2.92
+      },
+      "max_w": 15.0,
+      "kind": "speaker",
+      "label": "Sonos Ray",
+      "source": "nameplate"
+    },
+    "era 100": {
+      "idle_w": {
+        "230": 1.86,
+        "120": 1.98
+      },
+      "max_w": 18.0,
+      "kind": "speaker",
+      "label": "Sonos Era 100",
+      "source": "nameplate",
+      "no_ethernet": true
+    },
+    "era 100 sl": {
+      "idle_w": {
+        "230": 1.76,
+        "120": 1.62
+      },
+      "max_w": 18.0,
+      "kind": "speaker",
+      "label": "Sonos Era 100 SL",
+      "source": "nameplate",
+      "no_ethernet": true
+    },
+    "era 300": {
+      "idle_w": {
+        "230": 1.81,
+        "120": 1.71
+      },
+      "max_w": 28.0,
+      "kind": "speaker",
+      "label": "Sonos Era 300",
+      "source": "nameplate",
+      "no_ethernet": true
+    },
+    "five": {
+      "idle_w": {
+        "230": 3.1,
+        "120": 2.9
+      },
+      "max_w": 45.0,
+      "kind": "speaker",
+      "label": "Sonos Five",
+      "source": "nameplate"
+    },
+    "one": {
+      "idle_w": {
+        "230": 3.4,
+        "120": 3.1
+      },
+      "max_w": 20.0,
+      "kind": "speaker",
+      "label": "Sonos One (Gen 2)",
+      "source": "nameplate"
+    },
+    "one (gen 1)": {
+      "idle_w": {
+        "230": 4.1,
+        "120": 3.8
+      },
+      "max_w": 20.0,
+      "kind": "speaker",
+      "label": "Sonos One (Gen 1)",
+      "source": "nameplate"
+    },
+    "one sl": {
+      "idle_w": {
+        "230": 3.4,
+        "120": 3.0
+      },
+      "max_w": 20.0,
+      "kind": "speaker",
+      "label": "Sonos One SL",
+      "source": "nameplate"
+    },
+    "play:1": {
+      "idle_w": {
+        "230": 3.8,
+        "120": 3.4
+      },
+      "max_w": 18.0,
+      "kind": "speaker",
+      "label": "Sonos Play:1",
+      "source": "nameplate"
+    },
+    "play:3": {
+      "idle_w": {
+        "230": 4.4,
+        "120": 4.1
+      },
+      "max_w": 25.0,
+      "kind": "speaker",
+      "label": "Sonos Play:3",
+      "source": "nameplate"
+    },
+    "play:5": {
+      "idle_w": {
+        "230": 2.2,
+        "120": 2.1
+      },
+      "max_w": 45.0,
+      "kind": "speaker",
+      "label": "Sonos Play:5 (Gen 2)",
+      "source": "nameplate"
+    },
+    "play:5 (gen 1)": {
+      "idle_w": {
+        "230": 8.0,
+        "120": 6.9
+      },
+      "max_w": 45.0,
+      "kind": "speaker",
+      "label": "Sonos Play:5 (Gen 1)",
+      "source": "nameplate"
+    },
+    "play": {
+      "idle_w": {
+        "230": 1.47,
+        "120": 1.6
+      },
+      "max_w": 18.0,
+      "kind": "speaker",
+      "label": "Sonos Play",
+      "source": "nameplate"
+    },
+    "move": {
+      "idle_w": {
+        "230": 3.2,
+        "120": 3.0
+      },
+      "max_w": 30.0,
+      "kind": "speaker",
+      "label": "Sonos Move (Gen 1)",
+      "source": "nameplate"
+    },
+    "move 2": {
+      "idle_w": {
+        "230": 1.7,
+        "120": 1.6
+      },
+      "max_w": 30.0,
+      "kind": "speaker",
+      "label": "Sonos Move 2",
+      "source": "nameplate"
+    },
+    "roam": {
+      "idle_w": {
+        "230": 1.37,
+        "120": 1.34
+      },
+      "max_w": 12.0,
+      "kind": "speaker",
+      "label": "Sonos Roam",
+      "source": "nameplate"
+    },
+    "roam 2": {
+      "idle_w": {
+        "230": 1.37,
+        "120": 1.34
+      },
+      "max_w": 12.0,
+      "kind": "speaker",
+      "label": "Sonos Roam 2",
+      "source": "nameplate"
+    },
+    "roam sl": {
+      "idle_w": {
+        "230": 1.31,
+        "120": 1.24
+      },
+      "max_w": 12.0,
+      "kind": "speaker",
+      "label": "Sonos Roam SL",
+      "source": "nameplate"
+    },
+    "sub": {
+      "idle_w": {
+        "230": 3.8,
+        "120": 3.5
+      },
+      "max_w": 30.0,
+      "kind": "speaker",
+      "label": "Sonos Sub",
+      "source": "nameplate"
+    },
+    "sub mini": {
+      "idle_w": {
+        "230": 2.86,
+        "120": 2.98
+      },
+      "max_w": 20.0,
+      "kind": "speaker",
+      "label": "Sonos Sub Mini",
+      "source": "nameplate"
+    },
+    "sub 4": {
+      "idle_w": {
+        "230": 1.89,
+        "120": 1.75
+      },
+      "max_w": 25.0,
+      "kind": "speaker",
+      "label": "Sonos Sub 4",
+      "source": "nameplate"
+    },
+    "port": {
+      "idle_w": {
+        "230": 3.7,
+        "120": 3.6
+      },
+      "max_w": 4.2,
+      "kind": "line",
+      "label": "Sonos Port",
+      "source": "nameplate"
+    },
+    "connect": {
+      "idle_w": {
+        "230": 5.6,
+        "120": 5.0
+      },
+      "max_w": 6.0,
+      "kind": "line",
+      "label": "Sonos Connect",
+      "source": "nameplate"
+    },
+    "boost": {
+      "idle_w": {
+        "230": 2.3,
+        "120": 2.2
+      },
+      "max_w": 2.3,
+      "kind": "network",
+      "label": "Sonos Boost",
+      "source": "nameplate"
+    },
+    "bridge": {
+      "idle_w": {
+        "230": 4.2,
+        "120": 3.9
+      },
+      "max_w": 4.2,
+      "kind": "network",
+      "label": "Sonos Bridge",
+      "source": "nameplate"
+    },
+    "symfonisk bookshelf": {
+      "idle_w": {
+        "230": 2.6,
+        "120": 2.5
+      },
+      "max_w": 9.0,
+      "kind": "speaker",
+      "label": "IKEA SYMFONISK Regal (Gen 1)",
+      "source": "estimated"
+    },
+    "symfonisk bookshelf (gen 2)": {
+      "idle_w": {
+        "230": 2.05,
+        "120": 2.0
+      },
+      "max_w": 9.0,
+      "kind": "speaker",
+      "label": "IKEA SYMFONISK Regal (Gen 2)",
+      "source": "estimated"
+    },
+    "symfonisk table lamp": {
+      "idle_w": {
+        "230": 2.6,
+        "120": 2.5
+      },
+      "max_w": 9.0,
+      "kind": "speaker",
+      "label": "IKEA SYMFONISK Tischleuchte",
+      "source": "estimated"
+    },
+    "symfonisk picture frame": {
+      "idle_w": {
+        "230": 3.0,
+        "120": 2.9
+      },
+      "max_w": 14.0,
+      "kind": "speaker",
+      "label": "IKEA SYMFONISK Bilderrahmen",
+      "source": "estimated"
+    }
+  },
+  "aliases": {
+    "beam gen2": "beam (gen 2)",
+    "beam (gen2)": "beam (gen 2)",
+    "one gen2": "one",
+    "one (gen2)": "one",
+    "one gen1": "one (gen 1)",
+    "play:5 gen1": "play:5 (gen 1)",
+    "play:5 (gen1)": "play:5 (gen 1)",
+    "playbar (gen 1)": "playbar",
+    "sub (gen 2)": "sub",
+    "sub (gen 3)": "sub",
+    "subwoofer": "sub",
+    "zp80": "connect",
+    "zp90": "connect",
+    "zp100": "connect:amp",
+    "zp120": "connect:amp",
+    "symfonisk": "symfonisk bookshelf",
+    "symfonisk bookshelf speaker": "symfonisk bookshelf"
+  }
+}
