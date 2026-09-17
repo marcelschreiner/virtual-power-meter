@@ -1,0 +1,49 @@
+services:
+  virtual-power-meter:
+    build: .
+    container_name: virtual-power-meter
+    restart: unless-stopped
+
+    # Pflicht: Matter braucht mDNS (Multicast) und IPv6-Link-Local im LAN.
+    # Im Bridge-Netz von Docker findet kein Controller das Geraet.
+    network_mode: host
+
+    volumes:
+      # Kopplung und Zaehlerstaende - dieses Verzeichnis nicht loeschen,
+      # sonst muss neu gekoppelt werden.
+      - ./data:/data
+      - ./config:/config:ro
+      # Optional: den uebersetzten Code aus dem Ordner statt aus dem Image
+      # nehmen. Dann braucht eine Codeaenderung nur einen Neustart des
+      # Containers statt eines Image-Builds - praktisch auf einem NAS, dessen
+      # Docker-Oberflaeche keinen bequemen Rebuild kennt. Siehe README.
+      # - ./dist:/app/dist:ro
+
+    environment:
+      - TZ=Europe/Zurich
+      # Token setzen, sobald die API aus dem LAN erreichbar sein soll:
+      # - VPM_API_TOKEN=bitte-aendern
+      - VPM_LOG_LEVEL=INFO
+      # Nur noetig, wenn 5540/udp schon belegt ist (anderer Matter-Dienst auf
+      # dem NAS, z. B. der Matter-Server von Home Assistant):
+      # - VPM_MATTER_PORT=5541
+
+      # --- Philips Hue -------------------------------------------------
+      # Adresse und App-Key der Bridge. Ohne beides bleibt die Hue-Quelle aus.
+      # Wie man an den App-Key kommt, steht im README ("App-Key besorgen").
+      #
+      # Die Werte gehoeren in eine .env-Datei neben dieser Datei - sie ist
+      # per .gitignore ausgenommen, der App-Key landet so nicht im Repository:
+      #   HUE_BRIDGE_IP=192.168.1.42
+      #   HUE_APP_KEY=abcdef0123456789...
+      # Wer das nicht braucht, traegt die Werte hier direkt ein.
+      # Leere Variablen aendern nichts - dann gilt config/meters.json.
+      - VPM_HUE_ENABLED=${HUE_ENABLED:-}
+      - VPM_HUE_BRIDGE_IP=${HUE_BRIDGE_IP:-}
+      - VPM_HUE_APP_KEY=${HUE_APP_KEY:-}
+
+      # --- Sonos ---------------------------------------------------------
+      # Wird per Multicast selbst gefunden - deshalb network_mode: host oben.
+      - VPM_SONOS_ENABLED=${SONOS_ENABLED:-}
+      # Feste Adressen, falls die Suche nichts findet:
+      # - VPM_SONOS_IPS=10.0.0.5,10.0.0.6

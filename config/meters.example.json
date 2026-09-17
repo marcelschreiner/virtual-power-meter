@@ -1,0 +1,86 @@
+{
+  "bridge": {
+    "name": "Virtuelle Stromzaehler",
+    "vendorName": "Eigenbau",
+    "productName": "Virtual Power Meter Bridge",
+    "serialNumber": "vpm-0001",
+    "passcode": 20202021,
+    "discriminator": 3840,
+    "port": 5540
+  },
+  "api": {
+    "enabled": true,
+    "port": 8080,
+    "token": null
+  },
+
+  "_hinweis_intervall": "Sekunden zwischen zwei Energie-Ticks. Der Tick schreibt die Zaehlerstaende auf die Platte - auf einem NAS mit Festplatten ruhig gross waehlen (3600 = einmal pro Stunde).",
+  "integrationIntervalSeconds": 3600,
+
+  "_hinweis_meters": "Von Hand gefuehrte Zaehler, die ueber die HTTP-API gefuellt werden. Leer lassen, wenn nur Hue und Sonos gemessen werden sollen.",
+  "meters": [
+    {
+      "id": "hausanschluss",
+      "name": "Hausanschluss",
+      "kind": "meter",
+      "nominalVoltage": 230,
+      "phases": 3,
+      "initialEnergyImportedKwh": 0,
+      "initialEnergyExportedKwh": 0
+    },
+    {
+      "id": "pv",
+      "name": "PV-Anlage",
+      "kind": "meter",
+      "nominalVoltage": 230,
+      "phases": 3
+    },
+    {
+      "id": "demo",
+      "name": "Demo-Zaehler",
+      "kind": "plug",
+      "nominalVoltage": 230,
+      "phases": 1,
+      "simulation": {
+        "enabled": true,
+        "minWatts": 50,
+        "maxWatts": 2500,
+        "intervalSeconds": 10
+      }
+    }
+  ],
+
+  "_hinweis_sources": "Quellen legen ihre Zaehler selbst an: je Raum einen fuer Hue und einen fuer Sonos, dazu einen fuer die Grundlast der Hue-Bridge.",
+  "sources": {
+    "hue": {
+      "enabled": true,
+      "bridgeIp": "",
+      "bridgeWatts": 1.9,
+      "gamma": 2.0,
+      "intervalSeconds": 2,
+      "overrides": {
+        "by_model": {
+          "LCT015": { "max_w": 9.2, "standby_w": 0.38 }
+        },
+        "by_light": {
+          "Lampe am Stecker": { "max_w": 45.0, "label": "Roehrenradio" }
+        }
+      }
+    },
+    "sonos": {
+      "enabled": true,
+      "ips": [],
+      "mainsVoltage": "230",
+      "usbAdapterWatts": 0.5,
+      "intervalSeconds": 3,
+      "overrides": {
+        "by_model": {
+          "symfonisk bookshelf": { "max_w": 8.0, "standby_w": 2.4 }
+        },
+        "by_name": {
+          "Wohnzimmer · Sub": { "max_w": 35.0 }
+        }
+      }
+    }
+  }
+}

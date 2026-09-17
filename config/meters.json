@@ -1,0 +1,26 @@
+{
+  "bridge": {
+    "name": "Virtual Power Meter",
+    "serialNumber": "vpm-0001"
+  },
+  "api": {
+    "enabled": true,
+    "port": 8080
+  },
+  "meters": [],
+  "integrationIntervalSeconds": 3600,
+  "sources": {
+    "hue": {
+      "enabled": true,
+      "bridgeWatts": 1.9,
+      "gamma": 2.0,
+      "intervalSeconds": 2
+    },
+    "sonos": {
+      "enabled": true,
+      "mainsVoltage": "230",
+      "usbAdapterWatts": 0.5,
+      "intervalSeconds": 3
+    }
+  }
+}

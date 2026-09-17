@@ -1,0 +1,23 @@
+{
+  "name": "virtual-power-meter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Virtuelle Matter-Stromzaehler (Electrical Sensor) fuer Docker/NAS",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-data.mjs",
+    "start": "node dist/index.js",
+    "dev": "tsc -p tsconfig.json --watch",
+    "test": "npm run build && node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@matter/main": "0.17.9"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}

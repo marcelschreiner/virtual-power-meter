@@ -1,0 +1,1465 @@
+{
+  "lamps": [
+    {
+      "label": "exakt, weiss, voll",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.4573,
+          0.41
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 10.0,
+        "standbyW": 0.4,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "exakt, weiss, 50 %",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 0.5,
+        "mode": "xy",
+        "xy": [
+          0.4573,
+          0.41
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 2.9875,
+        "standbyW": 0.4,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "exakt, weiss, 1 %",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 0.01,
+        "mode": "xy",
+        "xy": [
+          0.4573,
+          0.41
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 0.650935,
+        "standbyW": 0.4,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "exakt, tiefblau",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.15,
+          0.06
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 3.7408414885926713,
+        "standbyW": 0.4,
+        "colorFactor": 0.33057128220242477,
+        "uncertain": false
+      },
+      "colorFactor": 0.33057128220242477
+    },
+    {
+      "label": "exakt, magenta",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.38,
+          0.16
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 6.925580779272946,
+        "standbyW": 0.4,
+        "colorFactor": 0.671185110082668,
+        "uncertain": false
+      },
+      "colorFactor": 0.671185110082668
+    },
+    {
+      "label": "exakt, rot",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.675,
+          0.322
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 4.18760410407958,
+        "standbyW": 0.4,
+        "colorFactor": 0.3783533801154631,
+        "uncertain": false
+      },
+      "colorFactor": 0.3783533801154631
+    },
+    {
+      "label": "exakt, gruen",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.17,
+          0.7
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 3.8894104970653656,
+        "standbyW": 0.4,
+        "colorFactor": 0.34646101572891613,
+        "uncertain": false
+      },
+      "colorFactor": 0.34646101572891613
+    },
+    {
+      "label": "exakt, pastell",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.32,
+          0.4
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 9.193235341334098,
+        "standbyW": 0.4,
+        "colorFactor": 0.9137150097683527,
+        "uncertain": false
+      },
+      "colorFactor": 0.9137150097683527
+    },
+    {
+      "label": "exakt, kaltweiss 6500K",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.3135,
+          0.3236
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 10.0,
+        "standbyW": 0.4,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "aus",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": false,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": null,
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 0.4,
+        "standbyW": 0.4,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "stromlos",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCT015",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": null,
+        "gradientXy": [],
+        "reachable": false
+      },
+      "spec": {
+        "maxW": 10.0,
+        "standbyW": 0.4,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Color A19/A60 (Gen 3)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 0.0,
+        "standbyW": 0.0,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "ct-Modus ohne xy",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LTW010",
+        "archetype": "",
+        "capability": "ct",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "ct",
+        "xy": null,
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 6.8,
+        "standbyW": 0.3,
+        "gamma": 2.0,
+        "kind": "ct",
+        "label": "Hue White Ambiance E27",
+        "source": "measured",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 6.8,
+        "standbyW": 0.3,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "familie LCA042",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCA042",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.45,
+          0.41
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 11.166666666666666,
+        "standbyW": 0.38,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "LCA042 (aus LCA* abgeleitet)",
+        "source": "estimated",
+        "match": "family",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 11.166666666666666,
+        "standbyW": 0.38,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "archetyp lightstrip",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "XXX999",
+        "archetype": "hue_lightstrip",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.45,
+          0.41
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 17.0,
+        "standbyW": 0.1,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Lightstrip (generisch)",
+        "source": "estimated",
+        "match": "archetype",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 17.0,
+        "standbyW": 0.1,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "default dimmbar",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "",
+        "archetype": "",
+        "capability": "dimmable",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "none",
+        "xy": null,
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 8.0,
+        "standbyW": 0.35,
+        "gamma": 2.0,
+        "kind": "dimmable",
+        "label": "dimmbare Lampe (generisch)",
+        "source": "estimated",
+        "match": "default",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 8.0,
+        "standbyW": 0.35,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "default onoff",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "",
+        "archetype": "",
+        "capability": "onoff",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "none",
+        "xy": null,
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 6.0,
+        "standbyW": 0.3,
+        "gamma": 2.0,
+        "kind": "onoff",
+        "label": "schaltbare Lampe (generisch)",
+        "source": "estimated",
+        "match": "default",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 6.0,
+        "standbyW": 0.3,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "plug an",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "",
+        "archetype": "plug",
+        "capability": "onoff",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "none",
+        "xy": null,
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 0.4,
+        "standbyW": 0.3,
+        "gamma": 2.0,
+        "kind": "plug",
+        "label": "Smart Plug",
+        "source": "estimated",
+        "match": "archetype",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 0.4,
+        "standbyW": 0.3,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "colorFactor": 1.0
+    },
+    {
+      "label": "gradient",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LCX004",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 1.0,
+        "mode": "xy",
+        "xy": [
+          0.45,
+          0.41
+        ],
+        "gradientXy": [
+          [
+            0.675,
+            0.322
+          ],
+          [
+            0.15,
+            0.06
+          ],
+          [
+            0.45,
+            0.41
+          ]
+        ],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 0.1,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Gradient Lightstrip",
+        "source": "estimated",
+        "match": "exact",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 11.543456538182165,
+        "standbyW": 0.1,
+        "colorFactor": 0.5696415541059626,
+        "uncertain": true
+      },
+      "colorFactor": 0.5696415541059626
+    },
+    {
+      "label": "lightstrip halb",
+      "light": {
+        "id": "l1",
+        "name": "Lampe",
+        "modelId": "LST002",
+        "archetype": "",
+        "capability": "color",
+        "on": true,
+        "brightness": 0.5,
+        "mode": "xy",
+        "xy": [
+          0.45,
+          0.41
+        ],
+        "gradientXy": [],
+        "reachable": true
+      },
+      "spec": {
+        "maxW": 17.0,
+        "standbyW": 0.1,
+        "gamma": 2.0,
+        "kind": "color",
+        "label": "Hue Lightstrip Plus 2 m",
+        "source": "measured",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 4.512499999999999,
+        "standbyW": 0.1,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "colorFactor": 1.0
+    }
+  ],
+  "speakers": [
+    {
+      "label": "one leerlauf @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": false,
+        "muted": false,
+        "volume": 0.0,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.4,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 3.4,
+        "standbyW": 3.4,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "one spielt 60 % @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": true,
+        "muted": false,
+        "volume": 0.6,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.4,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 9.376,
+        "standbyW": 3.4,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "one spielt voll @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": true,
+        "muted": false,
+        "volume": 1.0,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.4,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 20.0,
+        "standbyW": 3.4,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "one stumm @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": true,
+        "muted": true,
+        "volume": 0.0,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.4,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 3.4,
+        "standbyW": 3.4,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "era 100 mit adapter @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Era 100",
+        "playing": true,
+        "muted": false,
+        "volume": 0.5,
+        "reachable": true
+      },
+      "adapterW": 0.5,
+      "spec": {
+        "maxW": 18.0,
+        "standbyW": 1.86,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos Era 100",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 6.3950000000000005,
+        "standbyW": 2.3600000000000003,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "needsUsbEthernet": true
+    },
+    {
+      "label": "era 100 leerlauf @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Era 100",
+        "playing": false,
+        "muted": false,
+        "volume": 0.0,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 18.0,
+        "standbyW": 1.86,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos Era 100",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 1.86,
+        "standbyW": 1.86,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": true
+    },
+    {
+      "label": "beam gen 2 @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Beam (Gen 2)",
+        "playing": true,
+        "muted": false,
+        "volume": 0.4,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 22.0,
+        "standbyW": 6.3,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos Beam (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 8.812000000000001,
+        "standbyW": 6.3,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "symfonisk @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos SYMFONISK Bookshelf",
+        "playing": true,
+        "muted": false,
+        "volume": 0.3,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 9.0,
+        "standbyW": 2.6,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "IKEA SYMFONISK Regal (Gen 1)",
+        "source": "estimated",
+        "match": "exact",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 3.176,
+        "standbyW": 2.6,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "port (line) @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Port",
+        "playing": true,
+        "muted": false,
+        "volume": 0.8,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 4.2,
+        "standbyW": 3.7,
+        "gamma": 2.0,
+        "kind": "line",
+        "label": "Sonos Port",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 4.2,
+        "standbyW": 3.7,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "boost (network) @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Boost",
+        "playing": true,
+        "muted": false,
+        "volume": 0.8,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 2.3,
+        "standbyW": 2.3,
+        "gamma": 2.0,
+        "kind": "network",
+        "label": "Sonos Boost",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 2.3,
+        "standbyW": 2.3,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "one gen 1 (family) @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One (Gen 1)",
+        "playing": true,
+        "muted": false,
+        "volume": 0.5,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 4.1,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 1)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 8.075,
+        "standbyW": 4.1,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "unbekannt @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Nichtsnutz 9000",
+        "playing": true,
+        "muted": false,
+        "volume": 0.5,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 4.0,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos Lautsprecher (generisch)",
+        "source": "estimated",
+        "match": "default",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 8.0,
+        "standbyW": 4.0,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "nicht erreichbar @230V",
+      "voltage": "230",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": false,
+        "muted": false,
+        "volume": 0.0,
+        "reachable": false
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.4,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 0.0,
+        "standbyW": 0.0,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "one leerlauf @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": false,
+        "muted": false,
+        "volume": 0.0,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.1,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 3.1,
+        "standbyW": 3.1,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "one spielt 60 % @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": true,
+        "muted": false,
+        "volume": 0.6,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.1,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 9.184,
+        "standbyW": 3.1,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "one spielt voll @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": true,
+        "muted": false,
+        "volume": 1.0,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.1,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 20.0,
+        "standbyW": 3.1,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "one stumm @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": true,
+        "muted": true,
+        "volume": 0.0,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.1,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 3.1,
+        "standbyW": 3.1,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "era 100 mit adapter @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Era 100",
+        "playing": true,
+        "muted": false,
+        "volume": 0.5,
+        "reachable": true
+      },
+      "adapterW": 0.5,
+      "spec": {
+        "maxW": 18.0,
+        "standbyW": 1.98,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos Era 100",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 6.484999999999999,
+        "standbyW": 2.48,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "needsUsbEthernet": true
+    },
+    {
+      "label": "era 100 leerlauf @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Era 100",
+        "playing": false,
+        "muted": false,
+        "volume": 0.0,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 18.0,
+        "standbyW": 1.98,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos Era 100",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 1.98,
+        "standbyW": 1.98,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": true
+    },
+    {
+      "label": "beam gen 2 @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Beam (Gen 2)",
+        "playing": true,
+        "muted": false,
+        "volume": 0.4,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 22.0,
+        "standbyW": 6.04,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos Beam (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 8.5936,
+        "standbyW": 6.04,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "symfonisk @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos SYMFONISK Bookshelf",
+        "playing": true,
+        "muted": false,
+        "volume": 0.3,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 9.0,
+        "standbyW": 2.5,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "IKEA SYMFONISK Regal (Gen 1)",
+        "source": "estimated",
+        "match": "exact",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 3.085,
+        "standbyW": 2.5,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "port (line) @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Port",
+        "playing": true,
+        "muted": false,
+        "volume": 0.8,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 4.2,
+        "standbyW": 3.6,
+        "gamma": 2.0,
+        "kind": "line",
+        "label": "Sonos Port",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 4.2,
+        "standbyW": 3.6,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "boost (network) @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Boost",
+        "playing": true,
+        "muted": false,
+        "volume": 0.8,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 2.3,
+        "standbyW": 2.2,
+        "gamma": 2.0,
+        "kind": "network",
+        "label": "Sonos Boost",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 2.2,
+        "standbyW": 2.2,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "one gen 1 (family) @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One (Gen 1)",
+        "playing": true,
+        "muted": false,
+        "volume": 0.5,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.8,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 1)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 7.85,
+        "standbyW": 3.8,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "unbekannt @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos Nichtsnutz 9000",
+        "playing": true,
+        "muted": false,
+        "volume": 0.5,
+        "reachable": true
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.8,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos Lautsprecher (generisch)",
+        "source": "estimated",
+        "match": "default",
+        "isEstimate": true
+      },
+      "estimate": {
+        "watts": 7.85,
+        "standbyW": 3.8,
+        "colorFactor": 1.0,
+        "uncertain": true
+      },
+      "needsUsbEthernet": false
+    },
+    {
+      "label": "nicht erreichbar @120V",
+      "voltage": "120",
+      "speaker": {
+        "name": "Wohnzimmer",
+        "model": "Sonos One",
+        "playing": false,
+        "muted": false,
+        "volume": 0.0,
+        "reachable": false
+      },
+      "adapterW": 0.0,
+      "spec": {
+        "maxW": 20.0,
+        "standbyW": 3.1,
+        "gamma": 2.0,
+        "kind": "speaker",
+        "label": "Sonos One (Gen 2)",
+        "source": "nameplate",
+        "match": "exact",
+        "isEstimate": false
+      },
+      "estimate": {
+        "watts": 0.0,
+        "standbyW": 0.0,
+        "colorFactor": 1.0,
+        "uncertain": false
+      },
+      "needsUsbEthernet": false
+    }
+  ]
+}
