@@ -1,5 +1,5 @@
 /**
- * Die Messquellen: Philips Hue und Sonos.
+ * Die Messquellen: Philips Hue, Sonos und Shelly.
  *
  * Beide werden regelmaessig abgefragt, jedes Geraet einzeln geschaetzt und das
  * Ergebnis pro Raum aufsummiert (`aggregate.ts`). Je Raum entsteht ein
@@ -8,6 +8,9 @@
  *
  * Geschaetzt, nicht gemessen: das Modell steht in `model.ts`, die Zahlen dahinter
  * in `data/lamp-models.json` und `data/speaker-models.json`.
+ *
+ * Shelly ist die Ausnahme: das Geraet misst selbst, sein Wert geht unveraendert
+ * an einen eigenen Zaehler je Shelly.
  */
 import { Logger } from "@matter/main";
 import type { AppConfig, MeterConfig } from "../config.js";
@@ -18,6 +21,7 @@ import { LampCatalog, SpeakerCatalog } from "./catalog.js";
 import { HueBridge, type HueLight } from "./hue.js";
 import { meterIdFor } from "./naming.js";
 import { KnownMeterStore, type MeterOrigin } from "./registry.js";
+import { ShellyDevice } from "./shelly.js";
 import { SonosSystem } from "./sonos.js";
 
 const logger = Logger.get("Sources");
@@ -49,16 +53,41 @@ export interface SourceStatus {
         error?: string;
         lastUpdate?: string;
     };
+    shelly: {
+        enabled: boolean;
+        devices: ShellyStatus[];
+    };
+}
+
+export interface ShellyStatus {
+    ip: string;
+    meterId: string;
+    connected: boolean;
+    /** 1 = Gen1, 2 = Gen2 und neuer. */
+    generation?: number;
+    model?: string;
+    /** Name aus der Shelly-App. */
+    name?: string;
+    watts?: number;
+    channels?: number;
+    error?: string;
+    lastUpdate?: string;
 }
 
 /** Vorlage fuer einen von einer Quelle angelegten Zaehler. */
-function meterConfigFor(id: string, name: string, nominalVoltage: number): MeterConfig {
+function meterConfigFor(
+    id: string,
+    name: string,
+    nominalVoltage: number,
+    kind: MeterConfig["kind"] = "meter",
+    phases: MeterConfig["phases"] = 1,
+): MeterConfig {
     return {
         id,
         name,
-        kind: "meter",
+        kind,
         nominalVoltage,
-        phases: 1,
+        phases,
         initialEnergyImportedKwh: 0,
         initialEnergyExportedKwh: 0,
         simulation: { enabled: false, minWatts: 0, maxWatts: 0, intervalSeconds: 10 },
@@ -74,11 +103,15 @@ export class SourceManager {
     #speakerCatalog?: SpeakerCatalog;
     #hue?: HueBridge;
     #sonos?: SonosSystem;
+    /** Zaehler-ID -> Geraet */
+    readonly #shellies = new Map<string, ShellyDevice>();
 
     #hueTimer?: NodeJS.Timeout;
     #sonosTimer?: NodeJS.Timeout;
+    #shellyTimer?: NodeJS.Timeout;
     #hueBusy = false;
     #sonosBusy = false;
+    #shellyBusy = false;
     #stopped = false;
 
     /** Zaehler-ID -> Raumname, getrennt nach Quelle, damit leere Raeume auf 0 fallen. */
@@ -91,6 +124,7 @@ export class SourceManager {
     #status: SourceStatus = {
         hue: { enabled: false, connected: false, lights: 0, rooms: 0 },
         sonos: { enabled: false, speakers: 0, rooms: 0, groups: 0 },
+        shelly: { enabled: false, devices: [] },
     };
 
     constructor(config: AppConfig, bridge: Bridge) {
@@ -113,9 +147,20 @@ export class SourceManager {
      * Sonos beim Start gerade nicht antworten.
      */
     async prepare(): Promise<void> {
-        const { hue, sonos } = this.#config.sources;
+        const { hue, sonos, shelly } = this.#config.sources;
         this.#status.hue.enabled = hue.enabled;
         this.#status.sonos.enabled = sonos.enabled;
+        this.#status.shelly.enabled = shelly.enabled;
+
+        // Shelly-Zaehler stehen fest in der Konfiguration - sie brauchen keine
+        // Liste, die sich merkt, was schon einmal da war.
+        if (shelly.enabled) {
+            for (const device of shelly.devices) {
+                await this.#bridge.addMeter(meterConfigFor(device.id, device.name, 230, device.kind, device.phases));
+                this.#shellies.set(device.id, new ShellyDevice(device.ip));
+                this.#status.shelly.devices.push({ ip: device.ip, meterId: device.id, connected: false });
+            }
+        }
 
         await this.#registry.load();
         let restored = 0;
@@ -133,7 +178,7 @@ export class SourceManager {
 
     /** Quellen verbinden, einmal abfragen und danach regelmaessig weiterfragen. */
     async start(): Promise<void> {
-        const { hue, sonos } = this.#config.sources;
+        const { hue, sonos, shelly } = this.#config.sources;
 
         if (hue.enabled) {
             this.#lampCatalog = await LampCatalog.load(hue.overrides);
@@ -153,6 +198,7 @@ export class SourceManager {
         // Einmal sofort, damit die Zaehler nicht erst nach dem ersten Intervall Werte tragen.
         await this.#pollHue();
         await this.#pollSonos();
+        await this.#pollShelly();
 
         if (this.#hue !== undefined) {
             this.#hueTimer = setInterval(() => void this.#pollHue(), hue.intervalSeconds * 1000);
@@ -160,14 +206,18 @@ export class SourceManager {
         if (this.#sonos !== undefined) {
             this.#sonosTimer = setInterval(() => void this.#pollSonos(), sonos.intervalSeconds * 1000);
         }
+        if (this.#shellies.size > 0) {
+            this.#shellyTimer = setInterval(() => void this.#pollShelly(), shelly.intervalSeconds * 1000);
+        }
     }
 
     async stop(): Promise<void> {
         this.#stopped = true;
         if (this.#hueTimer !== undefined) clearInterval(this.#hueTimer);
         if (this.#sonosTimer !== undefined) clearInterval(this.#sonosTimer);
+        if (this.#shellyTimer !== undefined) clearInterval(this.#shellyTimer);
         // Laufende Abfragen kurz auslaufen lassen, damit kein halber Schreibvorgang bleibt.
-        for (let waited = 0; (this.#hueBusy || this.#sonosBusy) && waited < 3000; waited += 50) {
+        for (let waited = 0; (this.#hueBusy || this.#sonosBusy || this.#shellyBusy) && waited < 3000; waited += 50) {
             await new Promise(resolve => setTimeout(resolve, 50));
         }
     }
@@ -295,6 +345,62 @@ export class SourceManager {
         }
     }
 
+    async #pollShelly(): Promise<void> {
+        if (this.#shellies.size === 0 || this.#shellyBusy || this.#stopped) return;
+        this.#shellyBusy = true;
+
+        try {
+            // Alle gleichzeitig - ein haengender Shelly soll die anderen nicht aufhalten.
+            await Promise.all(
+                [...this.#shellies].map(([meterId, device]) => this.#pollOneShelly(meterId, device)),
+            );
+        } finally {
+            this.#shellyBusy = false;
+        }
+    }
+
+    async #pollOneShelly(meterId: string, device: ShellyDevice): Promise<void> {
+        const status = this.#status.shelly.devices.find(entry => entry.meterId === meterId);
+        const meter = this.#bridge.meters.get(meterId);
+        if (status === undefined || meter === undefined) return;
+
+        try {
+            const reading = await device.poll();
+            const wasConnected = status.connected;
+            Object.assign(status, {
+                connected: true,
+                generation: device.generation,
+                model: device.model,
+                name: device.name,
+                watts: round(reading.power, 2),
+                channels: reading.channels,
+                error: undefined,
+                lastUpdate: new Date().toISOString(),
+            });
+            if (!wasConnected) {
+                logger.info(`Shelly ${device.ip} verbunden (${device.model ?? "unbekanntes Modell"}, Gen${device.generation}).`);
+            }
+
+            await meter.setReachable(true);
+            // Nur Momentanwerte: die Energiezaehler mancher Shellys beginnen nach
+            // einem Neustart wieder bei 0 - aufintegriert wird deshalb hier.
+            await meter.applyReading({
+                power: round(reading.power, 2),
+                voltage: reading.voltage === undefined ? undefined : round(reading.voltage, 1),
+                current: reading.current === undefined ? undefined : round(reading.current, 3),
+            });
+        } catch (error) {
+            const message = messageOf(error);
+            // Nur beim Wechsel melden, nicht bei jeder Abfrage erneut.
+            if (status.connected || status.error === undefined) {
+                logger.warn(`Shelly ${device.ip}: ${message}`);
+            }
+            status.connected = false;
+            status.error = message;
+            await meter.setReachable(false);
+        }
+    }
+
     // ------------------------------------------------------------------
     // Zaehler fuehren
     // ------------------------------------------------------------------
@@ -388,7 +494,7 @@ function messageOf(error: unknown): string {
 
 /** Legt den Manager an, sofern ueberhaupt eine Quelle aktiviert ist. */
 export function createSourceManager(config: AppConfig, bridge: Bridge): SourceManager | undefined {
-    const { hue, sonos } = config.sources;
-    if (!hue.enabled && !sonos.enabled) return undefined;
+    const { hue, sonos, shelly } = config.sources;
+    if (!hue.enabled && !sonos.enabled && !shelly.enabled) return undefined;
     return new SourceManager(config, bridge);
 }

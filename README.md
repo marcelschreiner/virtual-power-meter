@@ -10,6 +10,8 @@ Die Werte kommen aus zwei Richtungen:
 - **Über die HTTP-API** – aus einem Skript, aus Node-RED, aus einer Home-Assistant-Automation oder direkt vom
   Wechselrichter. Typischer Fall: Zählerstände, die schon irgendwo im Haus vorliegen (Shelly, P1-Lesekopf),
   als saubere Matter-Geräte bereitstellen.
+- **Von Shellys** – einfach die [IP eines Shellys](#messquelle-shelly) eintragen; seine **gemessene** Leistung
+  erscheint als eigener Matter-Zähler.
 - **Aus eingebauten Quellen** – [Philips Hue und Sonos](#messquellen-hue-und-sonos) werden selbst abgefragt und
   ihr Verbrauch **geschätzt**. Je Raum entsteht ein Zähler fürs Licht und einer für den Ton. Diese Geräte messen
   ihren Verbrauch nicht selbst; was hier herauskommt, ist ein Modell – gut in Größenordnung und Verlauf, nicht
@@ -185,6 +187,36 @@ Nach einem Portwechsel muss **nicht** neu gekoppelt werden, solange `./data` erh
 - **QNAP:** In Container Station „Host“ als Netzwerkmodus wählen, ansonsten identisch.
 - **Unraid:** Netzwerktyp `host`, die beiden Pfade `/data` und `/config` als Volume-Mappings anlegen.
 - **Raspberry Pi / Linux-Server:** funktioniert unverändert, das Image baut auch auf arm64.
+
+## Messquelle: Shelly
+
+Jeder Shelly mit Strommessung lässt sich per IP-Adresse eintragen und erscheint dann als eigener Zähler. Anders
+als bei Hue und Sonos wird hier nichts geschätzt: Leistung, Spannung und Strom kommen direkt vom Gerät.
+
+```json
+"sources": {
+  "shelly": {
+    "devices": [
+      "192.168.1.50",
+      { "ip": "192.168.1.51", "id": "waschmaschine", "name": "Waschmaschine", "kind": "plug" },
+      { "ip": "192.168.1.52", "id": "hausanschluss", "name": "Hausanschluss", "phases": 3 }
+    ]
+  }
+}
+```
+
+Oder ganz ohne Datei: `VPM_SHELLY_IPS=192.168.1.50,192.168.1.51`.
+
+- **Gen1 und Gen2+ werden automatisch erkannt** (Plug S, 1PM, 2.5, EM, 3EM sowie Plus, Pro, Mini, Gen3, Gen4).
+- **Mehrkanalige Geräte** (2PM, Pro 4PM, 3EM) ergeben einen Zähler mit der Summe aller Kanäle. Die Spannung ist
+  der Mittelwert, der Strom wird bei mehreren Kanälen aus Leistung, Spannung und `phases` berechnet.
+- **Einspeisung:** Ein EM/3EM meldet negative Leistung, wenn Strom ins Netz geht; der Zähler führt das als
+  Einspeisung.
+- **Energie** wird wie bei allen Zählern aus der Leistung aufintegriert. Den Zählerstand des Shellys selbst
+  übernimmt der Container bewusst nicht: Manche Modelle fangen nach einem Neustart wieder bei 0 an.
+- **Passwortschutz** in der Shelly-App muss für das lokale Netz aus sein.
+- Ist ein Shelly nicht erreichbar, meldet sich sein Zähler im Controller als „keine Antwort“.
+- Der Zustand jedes Shellys (Modell, Generation, letzter Wert, Fehler) steht unter `GET /api/sources`.
 
 ## Messquellen: Hue und Sonos
 
@@ -381,7 +413,7 @@ als `Authorization: Bearer <token>` oder `X-API-Key: <token>`. `/health` ist imm
 | `POST` | `/api/meters/<id>` | Messwerte für einen Zähler setzen |
 | `POST` | `/api/meters` | Messwerte für mehrere Zähler auf einmal |
 | `GET` | `/api/commissioning` | Kopplungscodes und Fabric-Anzahl |
-| `GET` | `/api/sources` | Zustand von Hue und Sonos samt Einzelgeräten |
+| `GET` | `/api/sources` | Zustand von Hue, Sonos und Shelly samt Einzelgeräten |
 
 ### Felder eines Messwerts
 
@@ -514,6 +546,18 @@ aufgelaufene Energie fehlt. Beim normalen Stoppen wird noch einmal gesichert.
 | `intervalSeconds` | `3` | Abfrageintervall, Minimum 3 s (je Player zwei Anfragen) |
 | `overrides` | `{}` | eigene Leistungsdaten |
 
+### `sources.shelly`
+
+| Feld | Vorgabe | Bedeutung |
+| --- | --- | --- |
+| `enabled` | `true` | aktiv, sobald `devices` nicht leer ist; `false` schaltet ab |
+| `devices` | `[]` | Liste aus IP-Adressen oder Objekten (siehe unten) |
+| `intervalSeconds` | `2` | Abfrageintervall, Minimum 1 s |
+
+Je Gerät: `ip` (Pflicht), `id` (Vorgabe `shelly-<ip>`), `name` (Vorgabe `Shelly <ip>`), `kind` (`meter` oder
+`plug`), `phases` (`1` oder `3`). Die `id` sollte man setzen, wenn sich die IP ändern kann – sonst ist der
+Shelly nach einem Adresswechsel für den Controller ein neues Gerät.
+
 ### Umgebungsvariablen
 
 Sie überschreiben die Werte aus der Datei – praktisch, wenn man im Container ohne Datei-Mount arbeiten will.
@@ -534,6 +578,9 @@ Sie überschreiben die Werte aus der Datei – praktisch, wenn man im Container 
 | `VPM_SONOS_MAINS` | `230` oder `120` |
 | `VPM_SONOS_USB_WATTS` | Aufschlag je USB-Netzwerkadapter |
 | `VPM_SONOS_INTERVAL` | Abfrageintervall Sonos in Sekunden |
+| `VPM_SHELLY_IPS` | Shelly-Adressen, kommagetrennt (ersetzt `sources.shelly.devices`) |
+| `VPM_SHELLY_ENABLED` | Shelly-Quelle ein-/ausschalten |
+| `VPM_SHELLY_INTERVAL` | Abfrageintervall Shelly in Sekunden |
 | `VPM_PASSCODE`, `VPM_DISCRIMINATOR` | Kopplungsparameter |
 | `VPM_VENDOR_ID`, `VPM_PRODUCT_ID`, `VPM_SERIAL` | Geräteangaben |
 | `VPM_API_ENABLED`, `VPM_API_HOST`, `VPM_API_PORT`, `VPM_API_TOKEN` | HTTP-API |

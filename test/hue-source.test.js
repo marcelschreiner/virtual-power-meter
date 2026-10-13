@@ -138,6 +138,7 @@ function baseConfig(port, storage) {
                 intervalSeconds: 3,
                 overrides: {},
             },
+            shelly: { enabled: false, devices: [], intervalSeconds: 2 },
         },
         storagePath: storage,
         integrationIntervalSeconds: 10,

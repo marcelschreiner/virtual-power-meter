@@ -30,4 +30,7 @@ EXPOSE 5540/udp 5353/udp 8080/tcp
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
     CMD node -e "fetch('http://127.0.0.1:'+(process.env.VPM_API_PORT||8080)+'/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
 
-CMD ["node", "dist/index.js"]
+# Den Grossteil des Speichers belegt matter.js selbst (Datenmodell aller
+# Cluster, ~120 MB RSS schon ohne Zaehler). Die Flags druecken das etwas und
+# deckeln den Heap; --lite-mode/--jitless gehen nicht, fetch braucht WebAssembly.
+CMD ["node", "--optimize-for-size", "--max-semi-space-size=1", "--max-old-space-size=128", "dist/index.js"]
