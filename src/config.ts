@@ -92,9 +92,28 @@ export interface SonosSourceConfig {
     overrides: SpeakerOverrides;
 }
 
+/** Ein Shelly mit Strommessung. Er misst selbst, es wird nichts geschaetzt. */
+export interface ShellyDeviceConfig {
+    /** IP-Adresse oder Hostname im lokalen Netz. */
+    ip: string;
+    /** Zaehler-ID - ohne Angabe aus der Adresse gebildet ("shelly-192-168-1-50"). */
+    id: string;
+    name: string;
+    kind: MeterKind;
+    /** 3 fuer einen Drehstromzaehler (3EM, Pro 3EM). */
+    phases: 1 | 3;
+}
+
+export interface ShellySourceConfig {
+    enabled: boolean;
+    devices: ShellyDeviceConfig[];
+    intervalSeconds: number;
+}
+
 export interface SourcesConfig {
     hue: HueSourceConfig;
     sonos: SonosSourceConfig;
+    shelly: ShellySourceConfig;
 }
 
 export interface AppConfig {
@@ -272,11 +291,65 @@ function parseSources(raw: unknown): SourcesConfig {
         overrides: sonosOverrides,
     };
 
+    const shelly = parseShelly(input.shelly);
+
     if (hue.gamma <= 0) throw new ConfigError("sources.hue.gamma muss groesser als 0 sein");
     if (hue.bridgeWatts < 0) throw new ConfigError("sources.hue.bridgeWatts darf nicht negativ sein");
     if (sonos.usbAdapterWatts < 0) throw new ConfigError("sources.sonos.usbAdapterWatts darf nicht negativ sein");
 
-    return { hue, sonos };
+    return { hue, sonos, shelly };
+}
+
+/** "192.168.1.50" -> "shelly-192-168-1-50" */
+function shellyIdFor(ip: string): string {
+    return `shelly-${ip.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`.slice(0, 32).replace(/-+$/, "");
+}
+
+function parseShellyDevice(raw: unknown, index: number): ShellyDeviceConfig {
+    // Kurzform: nur die Adresse als String.
+    const input = (typeof raw === "string" ? { ip: raw } : raw) as Record<string, unknown> | null;
+    const path = `sources.shelly.devices[${index}]`;
+    if (typeof input !== "object" || input === null) throw new ConfigError(`${path} muss ein Objekt oder eine IP sein`);
+
+    const ip = typeof input.ip === "string" ? input.ip.trim() : "";
+    if (ip === "") throw new ConfigError(`${path}.ip fehlt`);
+
+    const id = typeof input.id === "string" && input.id.trim() !== "" ? input.id.trim() : shellyIdFor(ip);
+    if (!ID_PATTERN.test(id)) {
+        throw new ConfigError(`${path}.id "${id}" ist ungueltig - erlaubt sind Kleinbuchstaben, Ziffern und Bindestriche`);
+    }
+    const kind = input.kind ?? "meter";
+    if (kind !== "meter" && kind !== "plug") throw new ConfigError(`${path}.kind muss "meter" oder "plug" sein`);
+    const phases = requireNumber(input.phases, `${path}.phases`, 1);
+    if (phases !== 1 && phases !== 3) throw new ConfigError(`${path}.phases muss 1 oder 3 sein`);
+
+    return {
+        ip,
+        id,
+        name: typeof input.name === "string" && input.name.trim() !== "" ? input.name.trim() : `Shelly ${ip}`,
+        kind,
+        phases,
+    };
+}
+
+function parseShelly(raw: unknown): ShellySourceConfig {
+    const input = (typeof raw === "object" && raw !== null ? raw : {}) as Record<string, unknown>;
+
+    // VPM_SHELLY_IPS ersetzt die Liste aus der Datei - Name und ID entstehen dann aus der Adresse.
+    const fromEnv = envList("VPM_SHELLY_IPS");
+    const devicesRaw = fromEnv ?? (Array.isArray(input.devices) ? input.devices : []);
+    const devices = devicesRaw.map(parseShellyDevice);
+
+    return {
+        // Eine eingetragene Adresse genuegt; abschalten geht trotzdem ausdruecklich.
+        enabled: (envBoolean("VPM_SHELLY_ENABLED") ?? input.enabled !== false) && devices.length > 0,
+        devices,
+        // Ein Shelly beantwortet eine Anfrage pro Sekunde ohne Muehe.
+        intervalSeconds: Math.max(
+            1,
+            envNumber("VPM_SHELLY_INTERVAL") ?? requireNumber(input.intervalSeconds, "sources.shelly.intervalSeconds", 2),
+        ),
+    };
 }
 
 export async function loadConfig(): Promise<AppConfig> {
@@ -297,7 +370,7 @@ export async function loadConfig(): Promise<AppConfig> {
     const apiRaw = (fileContent.api ?? {}) as Record<string, unknown>;
 
     const sources = parseSources(fileContent.sources);
-    const sourcesActive = sources.hue.enabled || sources.sonos.enabled;
+    const sourcesActive = sources.hue.enabled || sources.sonos.enabled || sources.shelly.enabled;
 
     const metersRaw = fileContent.meters;
     // Quellen legen ihre Zaehler selbst an. Nur wenn gar nichts konfiguriert ist,
@@ -310,9 +383,10 @@ export async function loadConfig(): Promise<AppConfig> {
     if (meters.length === 0 && !sourcesActive) meters.push(...defaultMeters());
 
     const seen = new Set<string>();
-    for (const meter of meters) {
-        if (seen.has(meter.id)) throw new ConfigError(`Doppelte Zaehler-ID "${meter.id}"`);
-        seen.add(meter.id);
+    const shellyIds = sources.shelly.enabled ? sources.shelly.devices.map(device => device.id) : [];
+    for (const id of [...meters.map(meter => meter.id), ...shellyIds]) {
+        if (seen.has(id)) throw new ConfigError(`Doppelte Zaehler-ID "${id}"`);
+        seen.add(id);
     }
 
     const bridge: BridgeConfig = {

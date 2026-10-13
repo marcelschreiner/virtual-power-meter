@@ -67,6 +67,14 @@
         }
       }
     },
+    "shelly": {
+      "_hinweis": "Shellys mit Strommessung, je einer ein Zaehler. Eine IP als String genuegt.",
+      "devices": [
+        "192.168.1.50",
+        { "ip": "192.168.1.51", "id": "waschmaschine", "name": "Waschmaschine", "kind": "plug" }
+      ],
+      "intervalSeconds": 2
+    },
     "sonos": {
       "enabled": true,
       "ips": [],

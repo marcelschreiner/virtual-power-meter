@@ -47,3 +47,8 @@ services:
       - VPM_SONOS_ENABLED=${SONOS_ENABLED:-}
       # Feste Adressen, falls die Suche nichts findet:
       # - VPM_SONOS_IPS=10.0.0.5,10.0.0.6
+
+      # --- Shelly --------------------------------------------------------
+      # Adressen der Shellys, kommagetrennt. Je Shelly entsteht ein Zaehler
+      # mit der gemessenen Leistung. Leer = Liste aus config/meters.json.
+      - VPM_SHELLY_IPS=${SHELLY_IPS:-}
